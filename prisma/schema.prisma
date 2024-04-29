@@ -1,0 +1,53 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model rent {
+  IdRent      Int    @id @default(autoincrement())
+  NameRent    String @db.VarChar(200)
+  AddressRent String @db.VarChar(200)
+  TypeRent    Int
+  typerent type @relation(fields: [TypeRent], references: [IdType])
+  Images      String @db.VarChar(200)
+  sales sales[]
+}
+
+model roles {
+  IdRol Int    @id @default(autoincrement())
+  Rol   String @db.VarChar(100)
+  users users[]
+}
+
+model sales {
+  IdSales  Int @id @default(autoincrement())
+  IdUser   Int
+  users users @relation(fields: [IdUser], references: [IdUsers])
+  IdClient Int
+  IdRent   Int
+  rent rent @relation(fields: [IdRent], references: [IdRent])
+}
+
+model type {
+  IdType   Int    @id @default(autoincrement())
+  NameType String @db.VarChar(200)
+  rent rent[]
+}
+
+model users {
+  IdUsers  Int    @id @default(autoincrement())
+  Name     String @db.VarChar(200)
+  Lastname String @db.VarChar(200)
+  Identify String @db.VarChar(20)
+  Address  String @db.VarChar(200)
+  Phone    String @db.VarChar(20)
+  Password String @db.VarChar(20)
+  Rol      Int
+  roles   roles @relation(fields: [Rol], references: [IdRol])
+  sales sales[]
+}
