@@ -8,6 +8,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// INSERT INTO `rent` (`IdRent`, `NameRent`, `AddressRent`, `TypeRent`, `Images`) VALUES (NULL, 'Casa N°1', 'Dirección Casa', '1', 'Imagenes'), (NULL, 'Aparatmento', 'Dirección Apartamento', '2', 'Imagenes');
 model Rent {
   IdRent      Int    @id @default(autoincrement())
   NameRent    String @db.VarChar(200)
@@ -18,6 +19,7 @@ model Rent {
   sales Sales[]
 }
 
+// INSERT INTO `roles`(`Rol`) VALUES ('Administrador'),('Vendedor'),('Cliente')
 model Roles {
   IdRol Int    @id @default(autoincrement())
   Rol   String @db.VarChar(100)
@@ -35,19 +37,21 @@ model Sales {
   state State @relation(fields: [IdState], references: [IdState])
   rent Rent @relation(fields: [IdRent], references: [IdRent])
 }
-
+// INSERT INTO `state` (`IdState`, `State`) VALUES (NULL, 'En progreso'), (NULL, 'Finalizado');
 model State {
   IdState Int @id @default(autoincrement())
   State String
   sales Sales[]
 }
 
+// INSERT INTO `type` (`IdType`, `NameType`) VALUES (NULL, 'Casa'), (NULL, 'Edificio');
 model Type {
   IdType   Int    @id @default(autoincrement())
   NameType String @db.VarChar(200)
   rent Rent[]
 }
 
+// INSERT INTO `users` (`IdUsers`, `Name`, `Lastname`, `Identify`, `Address`, `Phone`, `Password`, `Rol`) VALUES (NULL, 'admin', 'admin', '123456789', 'admin', '123456789', 'admin', '1'), (NULL, 'Vendedor', 'Nuevo', '987654321', 'Dirección', '041656897456', '1234', '2'), (NULL, 'Cliente', 'Nuevo', '12345678', 'Dirección CLiente', '0121545875', '1234', '3');
 model Users {
   IdUsers  Int    @id @default(autoincrement())
   Name     String @db.VarChar(200)
