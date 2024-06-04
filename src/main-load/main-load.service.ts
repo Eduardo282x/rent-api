@@ -115,6 +115,30 @@ export class MainLoadService {
                         Price: 18000,
                         IdClient: 5,
                         Images: 'https://www.shutterstock.com/image-photo/new-modern-apartment-buildings-vancouver-600nw-2326087651.jpg'
+                    },
+                    {
+                        NameRent: 'Apartamento pequeño',
+                        Address: 'Cecilio acosta',
+                        AddressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
+                        TypeRent: 2,
+                        Rooms: 3,
+                        Bathrooms: 2,
+                        SquareMeters: 200,
+                        Price: 8000,
+                        IdClient: 5,
+                        Images: 'https://cdn.pixabay.com/photo/2013/11/13/21/14/san-francisco-210230_640.jpg'
+                    },
+                    {
+                        NameRent: 'Casa lujosa',
+                        Address: 'Bella vista',
+                        AddressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
+                        TypeRent: 1,
+                        Rooms: 5,
+                        Bathrooms: 4,
+                        SquareMeters: 350,
+                        Price: 350000,
+                        IdClient: 5,
+                        Images: 'https://assets.easybroker.com/property_images/1445843/21613488/EB-EN5843.jpg?version=1581143120'
                     }
                 ]
             });
