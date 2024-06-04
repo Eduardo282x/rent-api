@@ -24,7 +24,7 @@ export class MainLoadService {
                         Lastname: 'admin',
                         Identify: '28391325',
                         Password: 'admin',
-                        Address: 'admin@gmail.com',
+                        Email: 'admin@gmail.com',
                         Phone: '+584165610813',
                         Rol: 1
                     },
@@ -33,7 +33,7 @@ export class MainLoadService {
                         Lastname: 'Perez',
                         Identify: '28391325',
                         Password: '123',
-                        Address: 'vendedor@gmail.com',
+                        Email: 'vendedor@gmail.com',
                         Phone: '+584121222012',
                         Rol: 2
                     },
@@ -42,7 +42,25 @@ export class MainLoadService {
                         Lastname: 'Gonzales',
                         Identify: '987654321',
                         Password: '123',
-                        Address: 'cliente@gmail.com',
+                        Email: 'cliente@gmail.com',
+                        Phone: '+589863254',
+                        Rol: 3
+                    },
+                    {
+                        Name: 'Dueño 1',
+                        Lastname: 'Casa',
+                        Identify: '987654322',
+                        Password: '123',
+                        Email: 'cliente2@gmail.com',
+                        Phone: '+589863254',
+                        Rol: 3
+                    },
+                    {
+                        Name: 'Dueño 2',
+                        Lastname: 'Apartamento',
+                        Identify: '987654323',
+                        Password: '123',
+                        Email: 'cliente3@gmail.com',
                         Phone: '+589863254',
                         Rol: 3
                     },
@@ -76,14 +94,26 @@ export class MainLoadService {
                 data: [
                     {
                         NameRent: 'Casa N°1',
-                        AddressRent: 'Dirección de la casa',
+                        Address: 'Dirección de la casa',
+                        AddressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
                         TypeRent: 1,
+                        Rooms: 2,
+                        Bathrooms: 2,
+                        SquareMeters: 230,
+                        Price: 12000,
+                        IdClient: 4,
                         Images: 'https://casallasduque.com/wp-content/uploads/2022/07/remodelacion-apartamentos-montearrollo-comedor-1024x683.jpg'
                     },
                     {
                         NameRent: 'Apartamento',
-                        AddressRent: 'Dirección 5 de Julio con Bella vista',
+                        Address: 'Dirección 5 de Julio con Bella vista',
+                        AddressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
                         TypeRent: 2,
+                        Rooms: 5,
+                        Bathrooms: 4,
+                        SquareMeters: 600,
+                        Price: 18000,
+                        IdClient: 5,
                         Images: 'https://www.shutterstock.com/image-photo/new-modern-apartment-buildings-vancouver-600nw-2326087651.jpg'
                     }
                 ]
