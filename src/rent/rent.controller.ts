@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { RentService } from './rent.service';
 import { Rent } from '@prisma/client';
 
@@ -10,5 +10,9 @@ export class RentController {
     @Get()
     async getRents(): Promise<Rent[]> {
         return this.rentService.getAllRents();
+    }
+    @Get('/:id')
+    async getOneRent(@Param('id') id: string): Promise<Rent> {
+        return this.rentService.getOneRents(id);
     }
 }
