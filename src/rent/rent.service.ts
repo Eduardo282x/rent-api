@@ -1,5 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Rent, Type } from '@prisma/client';
+import { DtoBaseResponse } from 'src/dtos/base-response';
+import { baseResponse } from 'src/dtos/baseResponse';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -30,6 +32,21 @@ export class RentService {
 
         return oneRent;
     }
+
+    async postNewRent(rent: Rent): Promise<DtoBaseResponse>{
+        const createRent =  await this.prismaService.rent.create({
+            data: rent
+        });
+
+        if(!createRent){
+            throw new BadRequestException(`No se pudo registrar la propiedad.`);
+        }
+
+        baseResponse.message = 'Propiedad registrada exitosamente.';
+
+        return baseResponse;
+    }
+
     async getTypes(): Promise<Type[]>{
         return await this.prismaService.type.findMany();
     }

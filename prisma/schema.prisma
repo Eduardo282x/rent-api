@@ -16,6 +16,13 @@ model Rent {
   TypeRent       Int
   Rooms          Int
   Bathrooms      Int
+  Hall           Int
+  Parking        Int
+  North          Decimal @db.Decimal(10, 6)
+  East           Decimal @db.Decimal(10, 6)
+  West           Decimal @db.Decimal(10, 6)
+  South          Decimal @db.Decimal(10, 6)
+  Info           String  @db.VarChar(512)
   Price          Decimal @db.Decimal(10, 2)
   SquareMeters   Decimal @db.Decimal(10, 2)
   typerent       Type    @relation(fields: [TypeRent], references: [IdType])
@@ -62,6 +69,7 @@ model Users {
   Email    String  
   Phone    String  
   Password String  
+  Civil    String  
   Rol      Int
   roles    Roles   @relation(fields: [Rol], references: [IdRol])
   sales    Sales[]

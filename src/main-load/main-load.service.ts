@@ -26,6 +26,7 @@ export class MainLoadService {
                         Password: 'admin',
                         Email: 'admin@gmail.com',
                         Phone: '+584165610813',
+                        Civil: 'Soltero',
                         Rol: 1
                     },
                     {
@@ -35,6 +36,7 @@ export class MainLoadService {
                         Password: '123',
                         Email: 'vendedor@gmail.com',
                         Phone: '+584121222012',
+                        Civil: 'Soltero',
                         Rol: 2
                     },
                     {
@@ -44,6 +46,7 @@ export class MainLoadService {
                         Password: '123',
                         Email: 'cliente@gmail.com',
                         Phone: '+589863254',
+                        Civil: 'Soltero',
                         Rol: 3
                     },
                     {
@@ -53,6 +56,7 @@ export class MainLoadService {
                         Password: '123',
                         Email: 'cliente2@gmail.com',
                         Phone: '+589863254',
+                        Civil: 'Soltero',
                         Rol: 3
                     },
                     {
@@ -62,6 +66,7 @@ export class MainLoadService {
                         Password: '123',
                         Email: 'cliente3@gmail.com',
                         Phone: '+589863254',
+                        Civil: 'Soltero',
                         Rol: 3
                     },
                 ]
@@ -73,7 +78,7 @@ export class MainLoadService {
                         NameType: 'Casa'
                     },
                     {
-                        NameType: 'Edificio'
+                        NameType: 'Apartamento'
                     }
                 ]
             });
@@ -99,6 +104,13 @@ export class MainLoadService {
                         TypeRent: 1,
                         Rooms: 2,
                         Bathrooms: 2,
+                        Parking: 1,
+                        Hall: 2,
+                        North: -14.2658,
+                        South: 14.3659,
+                        East: 485.369,
+                        West: 14.3256,
+                        Info: 'Recien hecha',
                         SquareMeters: 230,
                         Price: 12000,
                         IdClient: 4,
@@ -111,6 +123,13 @@ export class MainLoadService {
                         TypeRent: 2,
                         Rooms: 5,
                         Bathrooms: 4,
+                        Parking: 1,
+                        Hall: 2,
+                        North: -14.2658,
+                        South: 14.3659,
+                        East: 485.369,
+                        West: 14.3256,
+                        Info: 'Recien hecha',
                         SquareMeters: 600,
                         Price: 18000,
                         IdClient: 5,
@@ -123,6 +142,13 @@ export class MainLoadService {
                         TypeRent: 2,
                         Rooms: 3,
                         Bathrooms: 2,
+                        Parking: 1,
+                        Hall: 2,
+                        North: -14.2658,
+                        South: 14.3659,
+                        East: 485.369,
+                        West: 14.3256,
+                        Info: 'Recien hecha',
                         SquareMeters: 200,
                         Price: 8000,
                         IdClient: 5,
@@ -135,6 +161,13 @@ export class MainLoadService {
                         TypeRent: 1,
                         Rooms: 5,
                         Bathrooms: 4,
+                        Parking: 1,
+                        Hall: 2,
+                        North: -14.2658,
+                        South: 14.3659,
+                        East: 485.369,
+                        West: 14.3256,
+                        Info: 'Recien hecha',
                         SquareMeters: 350,
                         Price: 350000,
                         IdClient: 5,
