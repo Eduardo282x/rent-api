@@ -18,8 +18,13 @@ export class UsersController {
         return await this.usersService.postNewUsers(newUser);
     }
 
+    @Post('return')
+    async postUsersReturn(@Body() newUser: DtoNewUser): Promise<DtoEditUser> {
+        return await this.usersService.postNewUsersReturn(newUser);
+    }
+
     @Put('/:id')
-    async putUsers(@Body() editUser: DtoEditUser, @Param('id') idUser: number): Promise<DtoBaseResponse>{
-        return await this.usersService.putUsers(editUser, idUser);
+    async putUsers(@Body() editUser: DtoEditUser): Promise<DtoBaseResponse>{
+        return await this.usersService.putUsers(editUser);
     }
 }

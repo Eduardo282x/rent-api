@@ -3,6 +3,7 @@ import { Rent, Type } from '@prisma/client';
 import { DtoBaseResponse } from 'src/dtos/base-response';
 import { baseResponse } from 'src/dtos/baseResponse';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { DtoRents, DtoUpdateRent } from './rent.dtos';
 
 @Injectable()
 export class RentService {
@@ -19,7 +20,7 @@ export class RentService {
     async getOneRents(id: string): Promise<Rent>{
         const oneRent =  await this.prismaService.rent.findUnique({
             where: {
-                IdRent: Number(id)
+                idRent: Number(id)
             },
             include: {
                 typerent: true
@@ -33,7 +34,7 @@ export class RentService {
         return oneRent;
     }
 
-    async postNewRent(rent: Rent): Promise<DtoBaseResponse>{
+    async postNewRent(rent: DtoRents): Promise<DtoBaseResponse>{
         const createRent =  await this.prismaService.rent.create({
             data: rent
         });
@@ -43,6 +44,41 @@ export class RentService {
         }
 
         baseResponse.message = 'Propiedad registrada exitosamente.';
+
+        return baseResponse;
+    }
+
+    async putUpdateRent(rent: DtoUpdateRent): Promise<DtoBaseResponse>{
+        const createRent =  await this.prismaService.rent.update({
+            data: {
+                nameRent: rent.nameRent,
+                address: rent.address,
+                addressDetails: rent.addressDetails,
+                typeRent: rent.typeRent,
+                rooms: rent.rooms,
+                bathrooms: rent.bathrooms,
+                hall: rent.hall,
+                parking: rent.parking,
+                north: rent.north,
+                east: rent.east,
+                west: rent.west,
+                south: rent.south,
+                info: rent.info,
+                price: rent.price,
+                squareMeters: rent.squareMeters,
+                images: rent.images,
+                idClient: rent.idClient,
+            },
+            where: {
+                idRent: rent.idRent
+            }
+        });
+
+        if(!createRent){
+            throw new BadRequestException(`No se pudo actualizar la propiedad.`);
+        }
+
+        baseResponse.message = 'Propiedad actualizada exitosamente.';
 
         return baseResponse;
     }

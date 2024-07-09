@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { RentService } from './rent.service';
 import { Rent } from '@prisma/client';
 import { DtoBaseResponse } from 'src/dtos/base-response';
+import { DtoRents, DtoUpdateRent } from './rent.dtos';
 
 @Controller('rent')
 export class RentController {
@@ -18,7 +19,12 @@ export class RentController {
     }
 
     @Post()
-    async createRent(@Body() newRent): Promise<DtoBaseResponse> {
+    async createRent(@Body() newRent: DtoRents): Promise<DtoBaseResponse> {
         return this.rentService.postNewRent(newRent);
+    }
+
+    @Put()
+    async updateRent(@Body() updateRent: DtoUpdateRent): Promise<DtoBaseResponse> {
+        return this.rentService.putUpdateRent(updateRent);
     }
 }

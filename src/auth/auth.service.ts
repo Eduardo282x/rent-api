@@ -12,8 +12,8 @@ export class AuthService {
     async loginAsync(login: Login): Promise<DtoLogin> {
         const findUser: UserLogin = await this.prismaService.users.findFirst({
             where: {
-                Email: login.username,
-                Password: login.password
+                email: login.username,
+                password: login.password
             },
             include: {
                 roles: true,
@@ -25,7 +25,7 @@ export class AuthService {
         }
 
         const response: DtoLogin = {
-            message: `Bienvenido ${findUser.Name}`,
+            message: `Bienvenido ${findUser.name}`,
             token: findUser,
             success: true,
             statusCode: 200
