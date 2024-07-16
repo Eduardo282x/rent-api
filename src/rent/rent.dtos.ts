@@ -40,4 +40,6 @@ export class DtoRents {
 export class DtoUpdateRent extends DtoRents {
     @IsNumber()
     idRent: number;
+    @IsNumber()
+    autorizationId: number;
 }

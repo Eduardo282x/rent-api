@@ -13,7 +13,8 @@ export class MainLoadService {
                 data: [
                     { rol: 'Administrador' },
                     { rol: 'Vendedor' },
-                    { rol: 'Cliente' },
+                    { rol: 'Cliente vendedor' },
+                    { rol: 'Cliente comprador' },
                 ]
             });
 
@@ -94,7 +95,6 @@ export class MainLoadService {
                 ]
             });
 
-
             await this.prismaService.rent.createMany({
                 data: [
                     {
@@ -114,6 +114,7 @@ export class MainLoadService {
                         squareMeters: 230,
                         price: 12000,
                         idClient: 4,
+                        autorizationId: 1,
                         images: 'https://casallasduque.com/wp-content/uploads/2022/07/remodelacion-apartamentos-montearrollo-comedor-1024x683.jpg'
                     },
                     {
@@ -133,6 +134,7 @@ export class MainLoadService {
                         squareMeters: 600,
                         price: 18000,
                         idClient: 5,
+                        autorizationId: 1,
                         images: 'https://www.shutterstock.com/image-photo/new-modern-apartment-buildings-vancouver-600nw-2326087651.jpg'
                     },
                     {
@@ -152,6 +154,7 @@ export class MainLoadService {
                         squareMeters: 200,
                         price: 8000,
                         idClient: 5,
+                        autorizationId: null,
                         images: 'https://cdn.pixabay.com/photo/2013/11/13/21/14/san-francisco-210230_640.jpg'
                     },
                     {
@@ -171,6 +174,7 @@ export class MainLoadService {
                         squareMeters: 350,
                         price: 350000,
                         idClient: 5,
+                        autorizationId: null,
                         images: 'https://assets.easybroker.com/property_images/1445843/21613488/EB-EN5843.jpg?version=1581143120'
                     }
                 ]

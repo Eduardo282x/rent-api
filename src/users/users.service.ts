@@ -20,7 +20,7 @@ export class UsersService {
         const usersParse: any[] = getUsers;
 
         usersParse.map(us => {
-            us.rolDes = us.roles.Rol
+            us.rolDes = us.roles.rol
             delete us.roles
         });
 

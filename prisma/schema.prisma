@@ -28,6 +28,9 @@ model Rent {
   typerent       Type    @relation(fields: [typeRent], references: [idType])
   images         String  @db.VarChar(200)
   idClient       Int
+  autorizationId Int?
+  client         Users?   @relation("ClientRent", fields: [idClient], references: [idUsers])
+  autorization   Users?   @relation("AuthorizationRent", fields: [autorizationId], references: [idUsers])
   sales          Sales[]
 }
 
@@ -62,20 +65,22 @@ model Type {
 }
 
 model Users {
-  idUsers  Int     @id @default(autoincrement())
-  name     String  
-  lastname String  
-  identify String  
-  email    String  
-  phone    String  
-  password String  
-  civil    String  
-  rol      Int
-  roles    Roles   @relation(fields: [rol], references: [idRol])
-  sales    Sales[]
+  idUsers            Int     @id @default(autoincrement())
+  name               String
+  lastname           String
+  identify           String
+  email              String
+  phone              String
+  password           String
+  civil              String
+  rol                Int
+  roles              Roles   @relation(fields: [rol], references: [idRol])
+  sales              Sales[]
+  clientRents        Rent[]  @relation("ClientRent")
+  authorizationRents Rent[]  @relation("AuthorizationRent")
 }
 
 model Locations {
-  IdLocation Int @id @default(autoincrement())
-  location String
+  IdLocation Int    @id @default(autoincrement())
+  location   String
 }
