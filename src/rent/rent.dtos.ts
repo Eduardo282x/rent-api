@@ -1,4 +1,4 @@
-import { IsString, IsNumber } from "class-validator";
+import { IsString, IsNumber, IsBoolean } from "class-validator";
 
 export class DtoRents {
     @IsString()
@@ -42,4 +42,12 @@ export class DtoUpdateRent extends DtoRents {
     idRent: number;
     @IsNumber()
     autorizationId: number;
+}
+export class DtoRentAutorization {
+    @IsNumber()
+    idRent: number;
+    @IsNumber()
+    autorizationId: number;
+    @IsBoolean()
+    autorization: boolean;
 }

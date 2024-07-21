@@ -3,7 +3,7 @@ import { Rent, Type } from '@prisma/client';
 import { DtoBaseResponse } from 'src/dtos/base-response';
 import { baseResponse } from 'src/dtos/baseResponse';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { DtoRents, DtoUpdateRent } from './rent.dtos';
+import { DtoRentAutorization, DtoRents, DtoUpdateRent } from './rent.dtos';
 
 @Injectable()
 export class RentService {
@@ -11,6 +11,14 @@ export class RentService {
     constructor(private prismaService: PrismaService) { }
 
     async getAllRents(): Promise<Rent[]> {
+        
+        return await this.prismaService.rent.findMany({
+            include: {
+                typerent: true
+            }
+        });
+    }
+    async getAllRentsAvalibles(): Promise<Rent[]> {
         return await this.prismaService.rent.findMany({
             include: {
                 typerent: true
@@ -19,6 +27,17 @@ export class RentService {
                 autorizationId: {
                     not: null
                 },
+                autorizated: true
+            }
+        });
+    }
+    async getAllRentsUnavalibles(): Promise<Rent[]> {
+        return await this.prismaService.rent.findMany({
+            include: {
+                typerent: true
+            },
+            where: {
+                autorizationId: null
             }
         });
     }
@@ -60,7 +79,8 @@ export class RentService {
                 squareMeters: rent.squareMeters,
                 images: rent.images,
                 idClient: rent.idClient,
-                autorizationId: null
+                autorizationId: null,
+                autorizated: false
             }
         });
 
@@ -74,6 +94,16 @@ export class RentService {
     }
 
     async putUpdateRent(rent: DtoUpdateRent): Promise<DtoBaseResponse> {
+        const autorization = await this.prismaService.users.findFirst({
+            where: {
+                idUsers: rent.autorizationId
+            }
+        });
+
+        if(autorization && autorization.rol != 1){
+            throw new BadRequestException('No posee permisos para realizar esta accion.')
+        }
+        
         const createRent = await this.prismaService.rent.update({
             data: {
                 nameRent: rent.nameRent,
@@ -94,6 +124,36 @@ export class RentService {
                 images: rent.images,
                 idClient: rent.idClient,
                 autorizationId: rent.autorizationId
+            },
+            where: {
+                idRent: rent.idRent
+            }
+        });
+
+        if (!createRent) {
+            throw new BadRequestException(`No se pudo actualizar la propiedad.`);
+        }
+
+        baseResponse.message = 'Propiedad actualizada exitosamente.';
+
+        return baseResponse;
+    }
+
+    async autorizationRent(rent: DtoRentAutorization): Promise<DtoBaseResponse> {
+        const autorization = await this.prismaService.users.findFirst({
+            where: {
+                idUsers: rent.autorizationId
+            }
+        });
+
+        if(autorization && autorization.rol != 1){
+            throw new BadRequestException('No posee permisos para realizar esta accion.')
+        }
+
+        const createRent = await this.prismaService.rent.update({
+            data: {
+                autorizationId: rent.autorizationId,
+                autorizated: rent.autorization
             },
             where: {
                 idRent: rent.idRent

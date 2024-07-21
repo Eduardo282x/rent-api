@@ -24,8 +24,8 @@ export class DtoEditUser {
     phone: string;
     @IsString()
     civil: string;
-    @IsNumber()
-    idUsers: number;
+    // @IsNumber()
+    // idUsers: number;
 }
 export class DtoNewUser {
     @IsNumber()

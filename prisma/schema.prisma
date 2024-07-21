@@ -27,7 +27,8 @@ model Rent {
   squareMeters   Decimal @db.Decimal(10, 2)
   typerent       Type    @relation(fields: [typeRent], references: [idType])
   images         String  @db.VarChar(200)
-  idClient       Int
+  idClient       Int?
+  autorizated    Boolean
   autorizationId Int?
   client         Users?   @relation("ClientRent", fields: [idClient], references: [idUsers])
   autorization   Users?   @relation("AuthorizationRent", fields: [autorizationId], references: [idUsers])

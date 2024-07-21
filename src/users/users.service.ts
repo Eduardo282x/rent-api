@@ -71,7 +71,7 @@ export class UsersService {
         return createUser;
     }
 
-    async putUsers(user: DtoEditUser): Promise<DtoBaseResponse>{
+    async putUsers(user: DtoEditUser, idUser: string): Promise<DtoBaseResponse>{
         const findUser = await this.prismaService.users.update({
             data: {
                 name: user.name,
@@ -82,7 +82,7 @@ export class UsersService {
                 civil: user.civil,
             },
             where: {
-                idUsers: Number(user.idUsers)
+                idUsers: Number(idUser)
             }
         });
 
