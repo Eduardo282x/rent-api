@@ -14,7 +14,9 @@ export class RentService {
         
         return await this.prismaService.rent.findMany({
             include: {
-                typerent: true
+                typerent: true,
+                client: true,
+                autorization: true
             }
         });
     }
