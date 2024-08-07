@@ -358,3 +358,26 @@ export class RentService {
         return pdfRent;
     }
 }
+
+
+// CONTRATO DE COMPRAVENTA
+
+// Entre los suscritos a saber: [NOMBRE COMPLETO DEL COMPRADOR], mayor de edad, identificado con cédula de ciudadanía No. [NÚMERO], quien en adelante se denominará EL COMPRADOR; y por la otra parte [NOMBRE COMPLETO DEL VENDEDOR], mayor de edad, identificado con cédula de ciudadanía No. [NÚMERO], quien en adelante se denominará EL VENDEDOR, hemos convenido celebrar el presente CONTRATO DE COMPRAVENTA, el cual se regirá por las siguientes cláusulas:
+
+// PRIMERA. OBJETO: Por medio del presente contrato, EL VENDEDOR vende y transfiere a EL COMPRADOR el pleno dominio, posesión y propiedad del inmueble ubicado en [DIRECCIÓN COMPLETA DEL INMUEBLE], identificado con el folio de matrícula inmobiliaria No. [NÚMERO].
+
+// SEGUNDA. PRECIO Y FORMA DE PAGO: EL COMPRADOR se obliga a pagar a EL VENDEDOR la suma de [VALOR EN NÚMEROS Y LETRAS] por la compra del inmueble. El pago se realizará de la siguiente manera:
+// 1. Un valor de [VALOR EN NÚMEROS Y LETRAS] como pago inicial, el cual se entrega en este acto.
+// 2. El saldo restante de [VALOR EN NÚMEROS Y LETRAS] será pagado en [NÚMERO] cuotas mensuales y consecutivas de [VALOR DE LAS CUOTAS EN NÚMEROS Y LETRAS], las cuales serán canceladas por EL COMPRADOR a EL VENDEDOR, a más tardar el día [NÚMERO] de cada mes.
+
+// TERCERA. ENTREGA DEL INMUEBLE: EL VENDEDOR se compromete a hacer entrega material y jurídica del inmueble a EL COMPRADOR en un plazo máximo de [NÚMERO] días hábiles, contados a partir de la fecha de firma del presente contrato.
+
+// CUARTA. SANEAMIENTO: EL VENDEDOR declara que el inmueble objeto de este contrato se encuentra libre de todo gravamen, limitación, afectación o condición que pueda afectar su dominio y que, en consecuencia, puede disponer libremente de él.
+
+// QUINTA. GASTOS: Los gastos notariales, de registro y demás que se originen con la firma y protocolización del presente contrato, serán asumidos en su totalidad por EL COMPRADOR.
+
+// En constancia de lo anterior, se firma el presente contrato en la ciudad de [CIUDAD], a los [DÍA] días del mes de [MES] de [AÑO].
+
+// EL COMPRADOR                                 EL VENDEDOR
+// [NOMBRE COMPLETO]                           [NOMBRE COMPLETO]
+// C.C. [NÚMERO]                                 C.C. [NÚMERO]
