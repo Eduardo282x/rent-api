@@ -26,7 +26,7 @@ export class MainLoadService {
                         identify: 'V-28391325',
                         password: 'admin',
                         email: 'admin@gmail.com',
-                        phone: '+584165610813',
+                        phone: '04165610813',
                         civil: 'Soltero',
                         rol: 1
                     },
@@ -36,7 +36,7 @@ export class MainLoadService {
                         identify: 'V-28391325',
                         password: '123',
                         email: 'vendedor@gmail.com',
-                        phone: '+584121222012',
+                        phone: '04121222012',
                         civil: 'Soltero',
                         rol: 2
                     },
@@ -46,7 +46,7 @@ export class MainLoadService {
                         identify: 'V-987654321',
                         password: '123',
                         email: 'cliente@gmail.com',
-                        phone: '+589863254',
+                        phone: '04149863254',
                         civil: 'Soltero',
                         rol: 3
                     },
@@ -56,7 +56,7 @@ export class MainLoadService {
                         identify: 'V-987654322',
                         password: '123',
                         email: 'cliente2@gmail.com',
-                        phone: '+589863254',
+                        phone: '04269863254',
                         civil: 'Soltero',
                         rol: 3
                     },
@@ -66,7 +66,7 @@ export class MainLoadService {
                         identify: 'V-987654323',
                         password: '123',
                         email: 'cliente3@gmail.com',
-                        phone: '+589863254',
+                        phone: '04249863254',
                         civil: 'Soltero',
                         rol: 3
                     },
