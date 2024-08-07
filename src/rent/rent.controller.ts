@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { RentService } from './rent.service';
 import { Rent } from '@prisma/client';
 import { DtoBaseResponse } from 'src/dtos/base-response';
@@ -22,9 +22,30 @@ export class RentController {
         return this.rentService.getOneRents(id);
     }
 
+    @Get('/pdfDownload/:id')
+    async getPdfRent(@Param('id') id: string, @Res() res): Promise<void> {
+        const buffer = await this.rentService.getPdfDownload(id);
+
+        res.set({
+            "Content-Type":"application/pdf",
+            "Content-Disposition":"attachment; filename=compra-venta.pdf",
+            "Content-Length":buffer.length
+        });
+
+        res.end(buffer);
+    }
+
     @Post()
-    async createRent(@Body() newRent: DtoRents): Promise<DtoBaseResponse> {
-        return this.rentService.postNewRent(newRent);
+    async createRent(@Body() newRent: DtoRents, @Res() res): Promise<void> {
+        const buffer = await this.rentService.postNewRent(newRent);
+
+        res.set({
+            "Content-Type":"application/pdf",
+            "Content-Disposition":"attachment; filename=compra-venta.pdf",
+            "Content-Length":buffer.length
+        });
+
+        res.end(buffer);
     }
 
     @Put()

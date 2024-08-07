@@ -23,7 +23,7 @@ export class MainLoadService {
                     {
                         name: 'admin',
                         lastname: 'admin',
-                        identify: '28391325',
+                        identify: 'V-28391325',
                         password: 'admin',
                         email: 'admin@gmail.com',
                         phone: '+584165610813',
@@ -33,7 +33,7 @@ export class MainLoadService {
                     {
                         name: 'Vendedor',
                         lastname: 'Perez',
-                        identify: '28391325',
+                        identify: 'V-28391325',
                         password: '123',
                         email: 'vendedor@gmail.com',
                         phone: '+584121222012',
@@ -43,7 +43,7 @@ export class MainLoadService {
                     {
                         name: 'Cliente',
                         lastname: 'Gonzales',
-                        identify: '987654321',
+                        identify: 'V-987654321',
                         password: '123',
                         email: 'cliente@gmail.com',
                         phone: '+589863254',
@@ -53,7 +53,7 @@ export class MainLoadService {
                     {
                         name: 'Dueño 1',
                         lastname: 'Casa',
-                        identify: '987654322',
+                        identify: 'V-987654322',
                         password: '123',
                         email: 'cliente2@gmail.com',
                         phone: '+589863254',
@@ -63,7 +63,7 @@ export class MainLoadService {
                     {
                         name: 'Dueño 2',
                         lastname: 'Apartamento',
-                        identify: '987654323',
+                        identify: 'V-987654323',
                         password: '123',
                         email: 'cliente3@gmail.com',
                         phone: '+589863254',
@@ -116,6 +116,10 @@ export class MainLoadService {
                         idClient: 4,
                         autorizationId: 1,
                         autorizated: true,
+                        avenue: 'Avenida 108',
+                        urbanization: 'La Rotaria',
+                        days: 10,
+                        date: new Date('2024-04-15'),
                         images: 'https://casallasduque.com/wp-content/uploads/2022/07/remodelacion-apartamentos-montearrollo-comedor-1024x683.jpg'
                     },
                     {
@@ -137,6 +141,10 @@ export class MainLoadService {
                         idClient: 5,
                         autorizationId: 1,
                         autorizated: true,
+                        avenue: 'La Limpia',
+                        urbanization: 'Curva de Molina',
+                        days: 15,
+                        date: new Date('2024-06-08'),
                         images: 'https://www.shutterstock.com/image-photo/new-modern-apartment-buildings-vancouver-600nw-2326087651.jpg'
                     },
                     {
@@ -158,6 +166,10 @@ export class MainLoadService {
                         idClient: 5,
                         autorizationId: null,
                         autorizated: false,
+                        avenue: 'La limpia',
+                        urbanization: 'Los olivos',
+                        days: 20,
+                        date: new Date('2024-02-28'),
                         images: 'https://cdn.pixabay.com/photo/2013/11/13/21/14/san-francisco-210230_640.jpg'
                     },
                     {
@@ -179,6 +191,10 @@ export class MainLoadService {
                         idClient: 5,
                         autorizationId: null,
                         autorizated: false,
+                        avenue: 'Circunvalación 3',
+                        urbanization: 'Los bucares',
+                        days: 30,
+                        date: new Date(),
                         images: 'https://assets.easybroker.com/property_images/1445843/21613488/EB-EN5843.jpg?version=1581143120'
                     }
                 ]

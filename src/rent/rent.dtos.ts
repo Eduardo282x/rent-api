@@ -6,7 +6,13 @@ export class DtoRents {
     @IsString()
     address: string
     @IsString()
+    urbanization: string
+    @IsString()
+    avenue: string
+    @IsString()
     addressDetails: string
+    @IsNumber()
+    days: number;
     @IsNumber()
     typeRent: number;
     @IsNumber()

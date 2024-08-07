@@ -18,6 +18,10 @@ model Rent {
   bathrooms      Int
   hall           Int
   parking        Int
+  urbanization   String
+  avenue         String
+  days           Int
+  date           DateTime
   north          Decimal @db.Decimal(10, 6)
   east           Decimal @db.Decimal(10, 6)
   west           Decimal @db.Decimal(10, 6)
