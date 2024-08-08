@@ -39,6 +39,7 @@ export class RentService {
         return oneRent;
     }
 
+    
     async postNewRent(rent: DtoRents): Promise<Buffer> {
         const createRent = await this.prismaService.rent.create({
             data: {
