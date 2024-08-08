@@ -23,14 +23,6 @@ export class DtoRents {
     hall: number;
     @IsNumber()
     parking: number;
-    @IsNumber()
-    north: number;
-    @IsNumber()
-    east: number;
-    @IsNumber()
-    west: number;
-    @IsNumber()
-    south: number;
     @IsString()
     info: string
     @IsNumber()
@@ -40,20 +32,12 @@ export class DtoRents {
     @IsString()
     images: string;
     @IsNumber()
+    idUser: number;
+    @IsNumber()
     idClient: number;
 }
 
-export class DtoUpdateRent extends DtoRents {
+export class DtoUpdateRent {
     @IsNumber()
     idRent: number;
-    @IsNumber()
-    autorizationId: number;
-}
-export class DtoRentAutorization {
-    @IsNumber()
-    idRent: number;
-    @IsNumber()
-    autorizationId: number;
-    @IsBoolean()
-    autorization: boolean;
 }
