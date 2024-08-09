@@ -12,6 +12,11 @@ export class UsersService {
 
     async getAllUsers(): Promise<DtoUsers[]>{
         const getUsers: Users[] = await this.prismaService.users.findMany({
+            where:{
+                rol: {
+                    in: [1,2]
+                }
+            },
             include: {
                 roles: true
             }
