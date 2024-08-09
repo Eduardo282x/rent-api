@@ -129,6 +129,14 @@ export class RentService {
         const pdfRent: Buffer = await new Promise(resolve => {
             const doc = new PDFDocument();
 
+            doc.image('src/assests/logo.jpg', {
+                width: 120,
+                height: 120,
+                align: 'center',
+                valign: 'center'
+            });
+            doc.moveDown(8);
+
             doc.text(`
                 Entre los suscritos a saber: ${oneRent.autorization.name} ${oneRent.autorization.lastname}, mayor de edad, identificado con cédula de ciudadanía No. ${oneRent.autorization.identify}, quien en adelante se denominará EL COMPRADOR; y por la otra parte ${oneRent.client.name} ${oneRent.client.lastname}, mayor de edad, identificado con cédula de ciudadanía No. ${oneRent.client.identify}, quien en adelante se denominará EL VENDEDOR, hemos convenido celebrar el presente CONTRATO DE COMPRAVENTA, el cual se regirá por las siguientes cláusulas:
 
@@ -160,6 +168,35 @@ export class RentService {
                     indent: 10
                 }
             );
+
+            const footerText = "Edificio Cora, Planta Baja, Calle 80, entre Av. 4 bellavista y Av.3Y San Martin, N°3Y-71, Local N°4 Teléfonos: (0261)3233342 / (0414)6345864 Maracaibo, Edo. Zulia";
+            const footerColor = 'gray';
+
+            
+            // Función para agregar el footer
+            const addFooter = () => {
+                doc.fillColor(footerColor)
+                    .fontSize(7)
+                    .text(footerText, {
+                        align: 'center',
+                    });
+            };
+
+            const addHorizontalLine = () => {
+                doc.moveTo(50, doc.y) // Ajusta 50 según el margen izquierdo deseado
+                    .lineTo(doc.page.width - 50, doc.y) // Ajusta 50 según el margen derecho deseado
+                    .stroke()
+                    .fillColor(footerColor)
+            };
+
+            addHorizontalLine();
+
+            doc.moveDown();
+
+            // Agregar el footer a la primera página
+            addFooter();
+
+            doc.on('pageAdded', addFooter);
 
             const buffer = [];
             doc.on('data', buffer.push.bind(buffer))
