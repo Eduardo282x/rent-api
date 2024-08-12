@@ -14,15 +14,19 @@ export class RentService {
 
     async getAllRents(): Promise<Rent[]> {
         return await this.prismaService.rent.findMany({
+            where: {
+                idState: 1
+            },
             include: {
                 typerent: true,
                 client: true,
-                autorization: true
+                autorization: true,
+                state: true
             }
         });
     }
     async getOneRents(id: string): Promise<Rent> {
-        const oneRent = await this.prismaService.rent.findUnique({
+        const oneRent = await this.prismaService.rent.findFirst({
             where: {
                 idRent: Number(id)
             },
@@ -69,11 +73,7 @@ export class RentService {
             throw new BadRequestException(`No se pudo registrar la propiedad.`);
         }
 
-        return this.getPdfDownload(createRent.idRent.toString());
-
-        // baseResponse.message = 'Propiedad registrada exitosamente.';
-
-        // return baseResponse;
+        return this.getPdfDownload(createRent.idRent.toString())
     }
 
     async putUpdateRent(rent: DtoUpdateRent): Promise<DtoBaseResponse> {
@@ -102,7 +102,7 @@ export class RentService {
 
     //Compra venta
     async getPdfDownload(id: string): Promise<Buffer> {
-        const oneRent = await this.prismaService.rent.findUnique({
+        const oneRent = await this.prismaService.rent.findFirst({
             where: {
                 idRent: Number(id)
             },
@@ -213,14 +213,22 @@ export class RentService {
 
     //Venta de la Inmobiliaria
     async getPdfDownloadFinish(id: string): Promise<Buffer> {
-        const oneRent = await this.prismaService.rent.findUnique({
+        const oneRent = await this.prismaService.sales.findFirst({
             where: {
-                idRent: Number(id)
+                rent: {
+                    idRent: Number(id)
+                }
             },
             include: {
-                typerent: true,
-                client: true,
-                autorization: true
+                rent: {
+                    include: {
+                        typerent: true,
+                        client: true,
+                        autorization: true,
+                        state: true
+                    }
+                },
+                client: true
             }
         });
 
@@ -228,15 +236,108 @@ export class RentService {
             throw new BadRequestException(`No se encontro el registro con el id ${id}`);
         }
 
+        const date = new Date(oneRent.date);
+        const day = date.getDate().toString().padStart(2, '0');
+        const year = date.getFullYear().toString();
+        const month: number = date.getMonth();
+        const monthNames: string[] = [
+            "enero", "febrero", "marzo", "abril", "mayo", "junio",
+            "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+        ];
+
         const pdfRent: Buffer = await new Promise(resolve => {
             const doc = new PDFDocument();
 
-            doc.font('Helvetica-Oblique').text(`Yo, IVONNE GONZALEZ, venezolana, mayor de edad, soltera, titular de la cédula de identidad Nº.V-5.053.166, actuando en nombre y representación de las ciudadanas DALIDA DEL CARMEN CELIS DE BASABE, venezolana, mayor de edad, viuda, titular de la cédula de identidad N° .V-7.616.675, y ANA DEL CARMEN BASABE CELIS, venezolana, mayor de edad, soltera, titular de la cedula de identidad N° V-10.447.823, según se evidencia de Poder General de Administración y Disposición, otorgado en el Estado de Florida, el día 15 de septiembre de 2.021, por ante el Notario Público, AIXA DAMARIS AVILES, Commission #HH 023658, el cual fue apostillado el día 3 de octubre de 2.021, ante la Secretaria del Estado de Florida, N° 2021-138640, y posteriormente Protocolizado por ante el Registro Público del Tercer Circuito del Municipio Maracaibo del Estado Zulia, el día 16 de Noviembre de 2.021, anotado bajo el N° 12, Folio 12013, Tomo 19, del Protocolo de Transcripción del año 2.021; por medio del presente documento declaro: En nombre de mis mandantes doy en venta pura y simple, perfecta e irrevocable, libre de todo gravamen y sin condición alguna, a los ciudadanos RONNY JESUS PACHECO MARQUEZ, venezolano, mayor de edad, soltero, titular de la cédula de identidad N° V-17.735.058 y NOREXCY CAROLINA HERNANDEZ GALLARDO, venezolana, mayor de edad, soltera, titular de la cédula de identidad N° V-19.546.087, de este mismo domicilio; un inmueble de la única y exclusiva propiedad de mis mandantes, constituido por una casa quinta compuesta de porche, sala, comedor, corredor, tres (3) dormitorios, cocina, una sala sanitaria, lavandería, una sala sanitaria en el patio trasero anexo a la lavandería y un depósito, construida con paredes de bloques frisados, techos de platabanda y zinc y pisos de cerámica, totalmente cercada con bahareque y cerca de hierro en su frente, ubicada en el Sector Sabaneta, avenida 21A, Casa N° 100-304, en jurisdicción de la parroquia Cristo de Aranza del Estado Zulia. La parcela de terreno donde se encuentra construida la casa objeto de esta venta, tiene una superficie aproximada de DOSCIENTOS CINCUENTA Y TRES METROS CUADRADOS CON OCHENTA Y NUEVE DECIMETROS CUADRADOS (253,89Mts2), y se encuentra comprendida dentro  de los siguientes linderos: NORTE: Linda con propiedad que eso fue Ángel Fuenmayor, casa N° 100-294; SUR: Linda con propiedad que eso fue de Lina Leal, casa N° 100-310; ESTE: Linda con la avenida 21A; y por el OESTE: Linda con propiedad que eso fue de Nila de Fuenmayor, casa N° 30-64. Dicho inmueble le pertenece a mis mandantes en virtud de haberlo adquirido según se evidencia en Documentos protocolizados por ante el Registro Público del Tercer Circuito del Municipio Autónomo Maracaibo del Estado Zulia, el día 14 de agosto de 2.013, inserto bajo el N° 2013.1601, Asiento Registral 1 del Inmueble Matriculado con el N° 481.21.5.3.2292 y correspondiente al libro de folio real del año 2.013, y ante el mismo registro, el día 26 de septiembre de 2.013, inserto bajo el N° 2013.1601, Asiento Registral 2 del Inmueble Matriculado con el N° 481.21.5.3.2292 y correspondiente al libro de folio real del año 2.013, asimismo, en su condición de herederas de la Sucesión BASABE VILLALOBOS LUIS ANTONIO, fallecido ab-intestato en esta Ciudad y Municipio Maracaibo del Estado Zulia en fecha 9 de Septiembre de 1997, conforme se evidencia a la Declaración Sucesoral N° 642-2022, expedida en fecha 26 de julio de 2022, emitida por el Servicio Nacional Integrado de Administración Aduanera y Tributaria (SENIAT), y le perteneció a su causante según consta en documentos protocolizados anteriormente mencionados. El precio de esta venta es la cantidad de SESENTA BOLÍVARES (Bs.60.000,00) que he recibido de los compradores, mediante cheque Nº S-91 20002950, de la entidad bancaria Banco de Venezuela, a la entera y total satisfacción de mis mandantes, con el otorgamiento de este documento y con fundamento en la titularidad antes invocada, en nombre de mis mandantes le transfiero a los compradores, todos los derechos de propiedad, dominio y posesión que les asisten sobre el referido bien, les hago la tradición legal y les respondo de saneamiento conforme a la ley. Y Nosotros, RONNY JESUS PACHECO MARQUEZ y NOREXCY CAROLINA HERNANDEZ GALLARDO, antes identificados, declaramos: Aceptamos la venta que se nos hace en los términos expuestos en este documento.- 
+            doc.image('src/assests/logo.jpg', {
+                width: 120,
+                height: 120,
+                align: 'center',
+                valign: 'center'
+            });
+            doc.moveDown(10);
+
+            doc.font('Helvetica-Oblique').text(`CONTRATO DE COMPRAVENTA DE INMUEBLE
+
+En la ciudad de ____________________, a los ${day} días del mes de ${monthNames[month]} del año ${year}, se reúnen:
+
+Por una parte, el/la señor/a ${oneRent.rent.client.name} ${oneRent.rent.client.lastname}, mayor de edad, de nacionalidad _____________, titular de la cédula de identidad Nº ${oneRent.rent.client.identify}, actuando en su propio nombre y representación, en calidad de VENDEDOR/A.
+
+Por otra parte, el/la señor/a ${oneRent.client.name} ${oneRent.client.lastname}, mayor de edad, de nacionalidad _____________, titular de la cédula de identidad Nº ${oneRent.client.identify}, actuando en su propio nombre y representación, en calidad de COMPRADOR/A.
+
+Y por otra parte, el/la señor/a ${oneRent.rent.autorization.name} ${oneRent.rent.autorization.lastname}, mayor de edad, de nacionalidad _____________, titular de la cédula de identidad Nº ${oneRent.rent.autorization.identify}, actuando en representación de la empresa Inversiones Siglo XXI INSICA, en calidad de PROMOTOR/A DE VENTAS.
+
+Todos los comparecientes, a quienes en lo sucesivo se les denominará conjuntamente como "LAS PARTES", han convenido en celebrar el presente Contrato de Compraventa de Inmueble, el cual se regirá por las siguientes cláusulas:
+
+CLÁUSULAS:
+
+PRIMERA: OBJETO DEL CONTRATO
+El/La VENDEDOR/A transfiere, vende y enajena de manera libre y voluntaria al/a la COMPRADOR/A, quien adquiere y compra, el siguiente inmueble:
+[Descripción detallada del inmueble: ubicación, área, tipo de propiedad, etc.]
+
+SEGUNDA: PRECIO Y FORMA DE PAGO
+El precio de la compraventa del inmueble asciende a la cantidad de _____________________________________________________________________ Bolívares Soberanos (Bs.S. ${this.formatNumber(Number(oneRent.rent.price))}), los cuales serán pagados de la siguiente manera: ________________________________________________________
+____________________________________________________________________________________________________________________________________________
+
+TERCERA: DECLARACIONES Y GARANTÍAS
+[Incluir declaraciones y garantías de las partes, incluyendo la titularidad del vendedor, ausencia de gravámenes, entre otros]
+
+CUARTA: OBLIGACIONES DE LAS PARTES
+[Detallar las principales obligaciones de cada una de las partes]
+
+QUINTA: CLAUSULAS LEGALES
+[Incluir cláusulas legales estándar para compraventa de inmuebles en Venezuela, tales como: inscripción en el Registro de la Propiedad, gastos e impuestos, saneamiento de evicción y vicios ocultos, resolución de conflictos, entre otros]
+
+SEXTA: FIRMAS Y TESTIGOS
+En señal de conformidad, las partes firman el presente contrato en tres (3) ejemplares de un mismo tenor y a un solo efecto, en presencia de los testigos que también suscriben al pie.
+
+Los contratantes, leído el presente documento, dan su asentimiento expresamente a lo estipulado y firman como aparece, ante testigos que los suscriben, en la ciudad de ______________a los ${day} días del mes de ${monthNames[month]} de ${year} en dos ejemplares, uno para cada prometiente.
+
+
+___________________________               _____________________________
+Nombre:         	                       Nombre:
+cc.:            			               cc:
+PROMETIENTE VENDEDOR                       PROMETIENTE COMPRADOR
+
+___________________________               _____________________________
+Nombre:                                   Nombre:
+cc.:                                      cc:
+Testigo                                   Testigo
+
 `,
                 {
                     align: 'justify',
                 }
             );
+
+            
+            const footerText = "Edificio Cora, Planta Baja, Calle 80, entre Av. 4 bellavista y Av.3Y San Martin, N°3Y-71, Local N°4 Teléfonos: (0261)3233342 / (0414)6345864 Maracaibo, Edo. Zulia";
+            const footerColor = 'gray';
+
+            
+            // Función para agregar el footer
+            const addFooter = () => {
+                doc.fillColor(footerColor)
+                    .fontSize(7)
+                    .text(footerText, {
+                        align: 'center',
+                    });
+            };
+
+            const addHorizontalLine = () => {
+                doc.moveTo(50, doc.y) // Ajusta 50 según el margen izquierdo deseado
+                    .lineTo(doc.page.width - 50, doc.y) // Ajusta 50 según el margen derecho deseado
+                    .stroke()
+                    .fillColor(footerColor)
+            };
+
+            addHorizontalLine();
+
+            doc.moveDown();
+
+            // Agregar el footer a la primera página
+            addFooter();
+
+            doc.on('pageAdded', addFooter);
 
             const buffer = [];
             doc.on('data', buffer.push.bind(buffer))

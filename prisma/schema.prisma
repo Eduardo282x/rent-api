@@ -43,21 +43,17 @@ model Roles {
 }
 
 model Sales {
-  idSales      Int      @id @default(autoincrement())
-  idUser       Int
-  users        Users    @relation(fields: [idUser], references: [idUsers])
-  idClient     Int
-  idRent       Int
-  date         DateTime
-  rent         Rent     @relation(fields: [idRent], references: [idRent])
-  State        State?   @relation(fields: [stateIdState], references: [idState])
-  stateIdState Int?
+  idSales  Int      @id @default(autoincrement())
+  idClient Int
+  client   Users    @relation(fields: [idClient], references: [idUsers])
+  idRent   Int
+  date     DateTime
+  rent     Rent     @relation(fields: [idRent], references: [idRent])
 }
 
 model State {
-  idState Int     @id @default(autoincrement())
+  idState Int    @id @default(autoincrement())
   state   String
-  sales   Sales[]
   Rent    Rent[]
 }
 
@@ -81,9 +77,4 @@ model Users {
   sales              Sales[]
   clientRents        Rent[]  @relation("ClientRent")
   authorizationRents Rent[]  @relation("AuthorizationRent")
-}
-
-model Locations {
-  IdLocation Int    @id @default(autoincrement())
-  location   String
 }
