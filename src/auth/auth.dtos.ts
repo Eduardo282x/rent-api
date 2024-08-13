@@ -8,6 +8,15 @@ export class Login{
     password: string;
 }
 
+export class Backup{
+    @IsString()
+    email: string;
+    @IsString()
+    phone: string;
+    @IsString()
+    password: string;
+}
+
 export class UserLogin {
     @IsNumber()
     idUsers: number;
