@@ -3,7 +3,7 @@ import { Rent, Type } from '@prisma/client';
 import { DtoBaseResponse } from 'src/dtos/base-response';
 import { baseResponse } from 'src/dtos/baseResponse';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { DtoRents, DtoUpdateRent } from './rent.dtos';
+import { DtoRents, DtoUpdateRent, DtoUpdateRentData } from './rent.dtos';
 
 const PDFDocument = require('pdfkit')
 
@@ -80,6 +80,37 @@ export class RentService {
         const createRent = await this.prismaService.rent.update({
             data: {
                 idState: 2
+            },
+            where: {
+                idRent: rent.idRent
+            }
+        });
+
+        if (!createRent) {
+            throw new BadRequestException(`No se pudo actualizar la propiedad.`);
+        }
+
+        baseResponse.message = 'Propiedad actualizada exitosamente.';
+
+        return baseResponse;
+    }
+
+    async putUpdateRentData(rent: DtoUpdateRentData): Promise<DtoBaseResponse> {
+        const createRent = await this.prismaService.rent.update({
+            data: {
+                nameRent: rent.nameRent,
+                address: rent.address,
+                typeRent: rent.typeRent,
+                rooms: rent.rooms,
+                bathrooms: rent.bathrooms,
+                hall: rent.hall,
+                parking: rent.parking,
+                info: rent.info,
+                price: rent.price,
+                squareMeters: rent.squareMeters,
+                avenue: rent.avenue,
+                urbanization: rent.urbanization,
+                days: rent.days,
             },
             where: {
                 idRent: rent.idRent
