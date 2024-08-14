@@ -14,7 +14,10 @@ export class AuthService {
         const findUser: UserLogin = await this.prismaService.users.findFirst({
             where: {
                 email: login.username,
-                password: login.password
+                password: login.password,
+                rol: {
+                    in: [1,2]
+                }
             },
             include: {
                 roles: true,
@@ -39,7 +42,10 @@ export class AuthService {
         const findUser = await this.prismaService.users.findFirst({
             where: {
                 email: backup.email,
-                phone: backup.phone
+                phone: backup.phone,
+                rol: {
+                    in: [1,2]
+                }
             },
         });
 

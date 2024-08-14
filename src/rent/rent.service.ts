@@ -96,7 +96,6 @@ export class RentService {
     }
 
     formatNumber(number: number): string {
-        number *= 37;
         return `${number.toLocaleString('de-DE')},00`;
     }
 
@@ -258,13 +257,13 @@ export class RentService {
 
             doc.font('Helvetica-Oblique').text(`CONTRATO DE COMPRAVENTA DE INMUEBLE
 
-En la ciudad de ____________________, a los ${day} días del mes de ${monthNames[month]} del año ${year}, se reúnen:
+En la ciudad de Maracaibo, Edo. Zulia Venezuela, a los ${day} días del mes de ${monthNames[month]} del año ${year}, se reúnen:
 
-Por una parte, el/la señor/a ${oneRent.rent.client.name} ${oneRent.rent.client.lastname}, mayor de edad, de nacionalidad _____________, titular de la cédula de identidad Nº ${oneRent.rent.client.identify}, actuando en su propio nombre y representación, en calidad de VENDEDOR/A.
+Por una parte, el/la señor/a ${oneRent.rent.client.name} ${oneRent.rent.client.lastname}, mayor de edad, de nacionalidad venezolano(a), titular de la cédula de identidad Nº ${oneRent.rent.client.identify}, actuando en su propio nombre y representación, en calidad de VENDEDOR/A.
 
-Por otra parte, el/la señor/a ${oneRent.client.name} ${oneRent.client.lastname}, mayor de edad, de nacionalidad _____________, titular de la cédula de identidad Nº ${oneRent.client.identify}, actuando en su propio nombre y representación, en calidad de COMPRADOR/A.
+Por otra parte, el/la señor/a ${oneRent.client.name} ${oneRent.client.lastname}, mayor de edad, de nacionalidad venezolano(a), titular de la cédula de identidad Nº ${oneRent.client.identify}, actuando en su propio nombre y representación, en calidad de COMPRADOR/A.
 
-Y por otra parte, el/la señor/a ${oneRent.rent.autorization.name} ${oneRent.rent.autorization.lastname}, mayor de edad, de nacionalidad _____________, titular de la cédula de identidad Nº ${oneRent.rent.autorization.identify}, actuando en representación de la empresa Inversiones Siglo XXI INSICA, en calidad de PROMOTOR/A DE VENTAS.
+Y por otra parte, el/la señor/a ${oneRent.rent.autorization.name} ${oneRent.rent.autorization.lastname}, mayor de edad, de nacionalidad venezolano(a), titular de la cédula de identidad Nº ${oneRent.rent.autorization.identify}, actuando en representación de la empresa Inversiones Siglo XXI INSICA, en calidad de PROMOTOR/A DE VENTAS.
 
 Todos los comparecientes, a quienes en lo sucesivo se les denominará conjuntamente como "LAS PARTES", han convenido en celebrar el presente Contrato de Compraventa de Inmueble, el cual se regirá por las siguientes cláusulas:
 
@@ -290,18 +289,18 @@ QUINTA: CLAUSULAS LEGALES
 SEXTA: FIRMAS Y TESTIGOS
 En señal de conformidad, las partes firman el presente contrato en tres (3) ejemplares de un mismo tenor y a un solo efecto, en presencia de los testigos que también suscriben al pie.
 
-Los contratantes, leído el presente documento, dan su asentimiento expresamente a lo estipulado y firman como aparece, ante testigos que los suscriben, en la ciudad de ______________a los ${day} días del mes de ${monthNames[month]} de ${year} en dos ejemplares, uno para cada prometiente.
+Los contratantes, leído el presente documento, dan su asentimiento expresamente a lo estipulado y firman como aparece, ante testigos que los suscriben, en la ciudad de Maracaibo, Edo. Zulia a los ${day} días del mes de ${monthNames[month]} de ${year} en dos ejemplares, uno para cada prometiente.
 
 
 ___________________________               _____________________________
-Nombre:         	                       Nombre:
-cc.:            			               cc:
-PROMETIENTE VENDEDOR                       PROMETIENTE COMPRADOR
+Nombre:                                                        Nombre:
+cc.:                                                                cc.:
+PROMETIENTE VENDEDOR                      PROMETIENTE COMPRADOR
 
 ___________________________               _____________________________
-Nombre:                                   Nombre:
-cc.:                                      cc:
-Testigo                                   Testigo
+Nombre:                                                        Nombre:
+cc.:                                                                cc.:
+Testigo                                                         Testigo
 
 `,
                 {
@@ -352,26 +351,3 @@ Testigo                                   Testigo
         return pdfRent;
     }
 }
-
-
-// CONTRATO DE COMPRAVENTA
-
-// Entre los suscritos a saber: [NOMBRE COMPLETO DEL COMPRADOR], mayor de edad, identificado con cédula de ciudadanía No. [NÚMERO], quien en adelante se denominará EL COMPRADOR; y por la otra parte [NOMBRE COMPLETO DEL VENDEDOR], mayor de edad, identificado con cédula de ciudadanía No. [NÚMERO], quien en adelante se denominará EL VENDEDOR, hemos convenido celebrar el presente CONTRATO DE COMPRAVENTA, el cual se regirá por las siguientes cláusulas:
-
-// PRIMERA. OBJETO: Por medio del presente contrato, EL VENDEDOR vende y transfiere a EL COMPRADOR el pleno dominio, posesión y propiedad del inmueble ubicado en [DIRECCIÓN COMPLETA DEL INMUEBLE], identificado con el folio de matrícula inmobiliaria No. [NÚMERO].
-
-// SEGUNDA. PRECIO Y FORMA DE PAGO: EL COMPRADOR se obliga a pagar a EL VENDEDOR la suma de [VALOR EN NÚMEROS Y LETRAS] por la compra del inmueble. El pago se realizará de la siguiente manera:
-// 1. Un valor de [VALOR EN NÚMEROS Y LETRAS] como pago inicial, el cual se entrega en este acto.
-// 2. El saldo restante de [VALOR EN NÚMEROS Y LETRAS] será pagado en [NÚMERO] cuotas mensuales y consecutivas de [VALOR DE LAS CUOTAS EN NÚMEROS Y LETRAS], las cuales serán canceladas por EL COMPRADOR a EL VENDEDOR, a más tardar el día [NÚMERO] de cada mes.
-
-// TERCERA. ENTREGA DEL INMUEBLE: EL VENDEDOR se compromete a hacer entrega material y jurídica del inmueble a EL COMPRADOR en un plazo máximo de [NÚMERO] días hábiles, contados a partir de la fecha de firma del presente contrato.
-
-// CUARTA. SANEAMIENTO: EL VENDEDOR declara que el inmueble objeto de este contrato se encuentra libre de todo gravamen, limitación, afectación o condición que pueda afectar su dominio y que, en consecuencia, puede disponer libremente de él.
-
-// QUINTA. GASTOS: Los gastos notariales, de registro y demás que se originen con la firma y protocolización del presente contrato, serán asumidos en su totalidad por EL COMPRADOR.
-
-// En constancia de lo anterior, se firma el presente contrato en la ciudad de [CIUDAD], a los [DÍA] días del mes de [MES] de [AÑO].
-
-// EL COMPRADOR                                 EL VENDEDOR
-// [NOMBRE COMPLETO]                           [NOMBRE COMPLETO]
-// C.C. [NÚMERO]                                 C.C. [NÚMERO]
