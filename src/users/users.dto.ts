@@ -24,8 +24,22 @@ export class DtoEditUser {
     phone: string;
     @IsString()
     civil: string;
+    // @IsNumber()
+    // idUsers: number;
 }
-export class DtoNewUser extends DtoEditUser {
+export class DtoNewUser {
     @IsNumber()
     rol: number;
+    @IsString()
+    name: string;
+    @IsString()
+    lastname: string;
+    @IsString()
+    identify: string;
+    @IsString()
+    email: string;
+    @IsString()
+    phone: string;
+    @IsString()
+    civil: string;
 }

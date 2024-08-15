@@ -8,21 +8,30 @@ export class Login{
     password: string;
 }
 
+export class Backup{
+    @IsString()
+    email: string;
+    @IsString()
+    phone: string;
+    @IsString()
+    password: string;
+}
+
 export class UserLogin {
     @IsNumber()
-    IdUsers: number;
+    idUsers: number;
     @IsString()
-    Name: string;
+    name: string;
     @IsString()
-    Lastname: string;
+    lastname: string;
     @IsString()
-    Identify: string;
+    identify: string;
     @IsString()
-    Email: string;
+    email: string;
     @IsString()
-    Phone: string;
+    phone: string;
     @IsNumber()
-    Rol: number;
+    rol: number;
 }
 
 export class DtoLogin extends DtoBaseResponse{

@@ -6,7 +6,7 @@ import { DtoBaseResponse } from 'src/dtos/base-response';
 @Controller('users')
 export class UsersController {
 
-    constructor(private usersService: UsersService){}
+    constructor(private usersService: UsersService) { }
 
     @Get()
     async getUsers(): Promise<DtoUsers[]> {
@@ -18,8 +18,13 @@ export class UsersController {
         return await this.usersService.postNewUsers(newUser);
     }
 
+    @Post('return')
+    async postUsersReturn(@Body() newUser: DtoNewUser): Promise<DtoEditUser> {
+        return await this.usersService.postNewUsersReturn(newUser);
+    }
+
     @Put('/:id')
-    async putUsers(@Body() editUser: DtoEditUser, @Param('id') idUser: number): Promise<DtoBaseResponse>{
-        return await this.usersService.putUsers(editUser, idUser);
+    async putUsers(@Body() editUser: DtoEditUser, @Param('id') id: string): Promise<DtoBaseResponse> {
+        return await this.usersService.putUsers(editUser, id);
     }
 }

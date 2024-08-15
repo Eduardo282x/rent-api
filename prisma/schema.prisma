@@ -9,73 +9,72 @@ datasource db {
 }
 
 model Rent {
-  IdRent         Int     @id @default(autoincrement())
-  NameRent       String  @db.VarChar(200)
-  Address        String  @db.VarChar(200)
-  AddressDetails String  @db.VarChar(512)
-  TypeRent       Int
-  Rooms          Int
-  Bathrooms      Int
-  Hall           Int
-  Parking        Int
-  North          Decimal @db.Decimal(10, 6)
-  East           Decimal @db.Decimal(10, 6)
-  West           Decimal @db.Decimal(10, 6)
-  South          Decimal @db.Decimal(10, 6)
-  Info           String  @db.VarChar(512)
-  Price          Decimal @db.Decimal(10, 2)
-  SquareMeters   Decimal @db.Decimal(10, 2)
-  typerent       Type    @relation(fields: [TypeRent], references: [IdType])
-  Images         String  @db.VarChar(200)
-  IdClient       Int
+  idRent         Int      @id @default(autoincrement())
+  nameRent       String   @db.VarChar(200)
+  address        String   @db.VarChar(200)
+  addressDetails String   @db.VarChar(512)
+  typeRent       Int
+  rooms          Int
+  bathrooms      Int
+  hall           Int
+  parking        Int
+  urbanization   String
+  avenue         String
+  days           Int
+  date           DateTime
+  info           String   @db.VarChar(512)
+  price          Decimal  @db.Decimal(10, 2)
+  squareMeters   Decimal  @db.Decimal(10, 2)
+  typerent       Type     @relation(fields: [typeRent], references: [idType])
+  images         String   @db.VarChar(200)
+  idClient       Int
+  autorizationId Int
+  idState        Int
+  state          State    @relation(fields: [idState], references: [idState])
+  client         Users    @relation("ClientRent", fields: [idClient], references: [idUsers])
+  autorization   Users    @relation("AuthorizationRent", fields: [autorizationId], references: [idUsers])
   sales          Sales[]
 }
 
 model Roles {
-  IdRol Int     @id @default(autoincrement())
-  Rol   String  @db.VarChar(100)
+  idRol Int     @id @default(autoincrement())
+  rol   String  @db.VarChar(100)
   users Users[]
 }
 
 model Sales {
-  IdSales  Int      @id @default(autoincrement())
-  IdUser   Int
-  users    Users    @relation(fields: [IdUser], references: [IdUsers])
-  IdClient Int
-  IdRent   Int
-  dafe     DateTime
-  IdState  Int
-  state    State    @relation(fields: [IdState], references: [IdState])
-  rent     Rent     @relation(fields: [IdRent], references: [IdRent])
+  idSales  Int      @id @default(autoincrement())
+  idClient Int
+  client   Users    @relation(fields: [idClient], references: [idUsers])
+  idRent   Int
+  date     DateTime
+  rent     Rent     @relation(fields: [idRent], references: [idRent])
 }
 
 model State {
-  IdState Int     @id @default(autoincrement())
-  State   String
-  sales   Sales[]
+  idState Int    @id @default(autoincrement())
+  state   String
+  Rent    Rent[]
 }
 
 model Type {
-  IdType   Int    @id @default(autoincrement())
-  NameType String @db.VarChar(200)
+  idType   Int    @id @default(autoincrement())
+  nameType String @db.VarChar(200)
   rent     Rent[]
 }
 
 model Users {
-  IdUsers  Int     @id @default(autoincrement())
-  Name     String  
-  Lastname String  
-  Identify String  
-  Email    String  
-  Phone    String  
-  Password String  
-  Civil    String  
-  Rol      Int
-  roles    Roles   @relation(fields: [Rol], references: [IdRol])
-  sales    Sales[]
-}
-
-model Locations {
-  IdLocation Int @id @default(autoincrement())
-  location String
+  idUsers            Int     @id @default(autoincrement())
+  name               String
+  lastname           String
+  identify           String
+  email              String
+  phone              String
+  password           String
+  civil              String
+  rol                Int
+  roles              Roles   @relation(fields: [rol], references: [idRol])
+  sales              Sales[]
+  clientRents        Rent[]  @relation("ClientRent")
+  authorizationRents Rent[]  @relation("AuthorizationRent")
 }

@@ -11,63 +11,64 @@ export class MainLoadService {
         try {
             await this.prismaService.roles.createMany({
                 data: [
-                    { Rol: 'Administrador' },
-                    { Rol: 'Vendedor' },
-                    { Rol: 'Cliente' },
+                    { rol: 'Gerente' },
+                    { rol: 'Promotor' },
+                    { rol: 'Cliente vendedor' },
+                    { rol: 'Cliente comprador' },
                 ]
             });
 
             await this.prismaService.users.createMany({
                 data: [
                     {
-                        Name: 'admin',
-                        Lastname: 'admin',
-                        Identify: '28391325',
-                        Password: 'admin',
-                        Email: 'admin@gmail.com',
-                        Phone: '+584165610813',
-                        Civil: 'Soltero',
-                        Rol: 1
+                        name: 'admin',
+                        lastname: 'admin',
+                        identify: 'V-28391325',
+                        password: 'admin',
+                        email: 'admin@gmail.com',
+                        phone: '04165610813',
+                        civil: 'Soltero',
+                        rol: 1
                     },
                     {
-                        Name: 'Vendedor',
-                        Lastname: 'Perez',
-                        Identify: '28391325',
-                        Password: '123',
-                        Email: 'vendedor@gmail.com',
-                        Phone: '+584121222012',
-                        Civil: 'Soltero',
-                        Rol: 2
+                        name: 'Vendedor',
+                        lastname: 'Perez',
+                        identify: 'V-28391325',
+                        password: '123',
+                        email: 'vendedor@gmail.com',
+                        phone: '04121222012',
+                        civil: 'Soltero',
+                        rol: 2
                     },
                     {
-                        Name: 'Cliente',
-                        Lastname: 'Gonzales',
-                        Identify: '987654321',
-                        Password: '123',
-                        Email: 'cliente@gmail.com',
-                        Phone: '+589863254',
-                        Civil: 'Soltero',
-                        Rol: 3
+                        name: 'Cliente',
+                        lastname: 'Gonzales',
+                        identify: 'V-987654321',
+                        password: '123',
+                        email: 'cliente@gmail.com',
+                        phone: '04149863254',
+                        civil: 'Soltero',
+                        rol: 3
                     },
                     {
-                        Name: 'Dueño 1',
-                        Lastname: 'Casa',
-                        Identify: '987654322',
-                        Password: '123',
-                        Email: 'cliente2@gmail.com',
-                        Phone: '+589863254',
-                        Civil: 'Soltero',
-                        Rol: 3
+                        name: 'Dueño 1',
+                        lastname: 'Casa',
+                        identify: 'V-987654322',
+                        password: '123',
+                        email: 'cliente2@gmail.com',
+                        phone: '04269863254',
+                        civil: 'Soltero',
+                        rol: 3
                     },
                     {
-                        Name: 'Dueño 2',
-                        Lastname: 'Apartamento',
-                        Identify: '987654323',
-                        Password: '123',
-                        Email: 'cliente3@gmail.com',
-                        Phone: '+589863254',
-                        Civil: 'Soltero',
-                        Rol: 3
+                        name: 'Dueño 2',
+                        lastname: 'Apartamento',
+                        identify: 'V-987654323',
+                        password: '123',
+                        email: 'cliente3@gmail.com',
+                        phone: '04249863254',
+                        civil: 'Soltero',
+                        rol: 3
                     },
                 ]
             });
@@ -75,10 +76,10 @@ export class MainLoadService {
             await this.prismaService.type.createMany({
                 data: [
                     {
-                        NameType: 'Casa'
+                        nameType: 'Casa'
                     },
                     {
-                        NameType: 'Apartamento'
+                        nameType: 'Apartamento'
                     }
                 ]
             });
@@ -86,92 +87,99 @@ export class MainLoadService {
             await this.prismaService.state.createMany({
                 data: [
                     {
-                        State: 'En progreso'
+                        state: 'Creada'
                     },
                     {
-                        State: 'Finalizado'
+                        state: 'Vendida'
                     }
                 ]
             });
 
-
             await this.prismaService.rent.createMany({
                 data: [
                     {
-                        NameRent: 'Casa N°1',
-                        Address: 'Dirección de la casa',
-                        AddressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
-                        TypeRent: 1,
-                        Rooms: 2,
-                        Bathrooms: 2,
-                        Parking: 1,
-                        Hall: 2,
-                        North: -14.2658,
-                        South: 14.3659,
-                        East: 485.369,
-                        West: 14.3256,
-                        Info: 'Recien hecha',
-                        SquareMeters: 230,
-                        Price: 12000,
-                        IdClient: 4,
-                        Images: 'https://casallasduque.com/wp-content/uploads/2022/07/remodelacion-apartamentos-montearrollo-comedor-1024x683.jpg'
+                        nameRent: 'Casa N°1',
+                        address: 'Dirección de la casa',
+                        addressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
+                        typeRent: 1,
+                        rooms: 2,
+                        bathrooms: 2,
+                        parking: 1,
+                        hall: 2,
+                        idState: 1,
+                        info: 'Recien hecha',
+                        squareMeters: 230,
+                        price: 12000,
+                        idClient: 4,
+                        autorizationId: 1,
+                        avenue: 'Avenida 108',
+                        urbanization: 'La Rotaria',
+                        days: 10,
+                        date: new Date('2024-04-15'),
+                        images: 'Casa1.webp'
                     },
                     {
-                        NameRent: 'Apartamento',
-                        Address: 'Dirección 5 de Julio con Bella vista',
-                        AddressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
-                        TypeRent: 2,
-                        Rooms: 5,
-                        Bathrooms: 4,
-                        Parking: 1,
-                        Hall: 2,
-                        North: -14.2658,
-                        South: 14.3659,
-                        East: 485.369,
-                        West: 14.3256,
-                        Info: 'Recien hecha',
-                        SquareMeters: 600,
-                        Price: 18000,
-                        IdClient: 5,
-                        Images: 'https://www.shutterstock.com/image-photo/new-modern-apartment-buildings-vancouver-600nw-2326087651.jpg'
+                        nameRent: 'Apartamento',
+                        address: 'Dirección 5 de Julio con Bella vista',
+                        addressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
+                        typeRent: 2,
+                        rooms: 5,
+                        bathrooms: 4,
+                        parking: 1,
+                        hall: 2,
+                        idState: 1,
+                        info: 'Recien hecha',
+                        squareMeters: 600,
+                        price: 18000,
+                        idClient: 5,
+                        autorizationId: 1,
+                        avenue: 'La Limpia',
+                        urbanization: 'Curva de Molina',
+                        days: 15,
+                        date: new Date('2024-06-08'),
+                        images: 'Casa2.webp'
                     },
                     {
-                        NameRent: 'Apartamento pequeño',
-                        Address: 'Cecilio acosta',
-                        AddressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
-                        TypeRent: 2,
-                        Rooms: 3,
-                        Bathrooms: 2,
-                        Parking: 1,
-                        Hall: 2,
-                        North: -14.2658,
-                        South: 14.3659,
-                        East: 485.369,
-                        West: 14.3256,
-                        Info: 'Recien hecha',
-                        SquareMeters: 200,
-                        Price: 8000,
-                        IdClient: 5,
-                        Images: 'https://cdn.pixabay.com/photo/2013/11/13/21/14/san-francisco-210230_640.jpg'
+                        nameRent: 'Apartamento pequeño',
+                        address: 'Cecilio acosta',
+                        addressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
+                        typeRent: 2,
+                        rooms: 3,
+                        bathrooms: 2,
+                        parking: 1,
+                        hall: 2,
+                        idState: 1,
+                        info: 'Recien hecha',
+                        squareMeters: 200,
+                        price: 8000,
+                        idClient: 5,
+                        autorizationId: 2,
+                        avenue: 'La limpia',
+                        urbanization: 'Los olivos',
+                        days: 20,
+                        date: new Date('2024-02-28'),
+                        images: 'san-francisco-210230_640.jpg'
                     },
                     {
-                        NameRent: 'Casa lujosa',
-                        Address: 'Bella vista',
-                        AddressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
-                        TypeRent: 1,
-                        Rooms: 5,
-                        Bathrooms: 4,
-                        Parking: 1,
-                        Hall: 2,
-                        North: -14.2658,
-                        South: 14.3659,
-                        East: 485.369,
-                        West: 14.3256,
-                        Info: 'Recien hecha',
-                        SquareMeters: 350,
-                        Price: 350000,
-                        IdClient: 5,
-                        Images: 'https://assets.easybroker.com/property_images/1445843/21613488/EB-EN5843.jpg?version=1581143120'
+                        nameRent: 'Casa lujosa',
+                        address: 'Bella vista',
+                        addressDetails: 'Sector la Macandona, Urbenizacion Jazmin, Calle 3, Casa # 17',
+                        typeRent: 1,
+                        rooms: 5,
+                        bathrooms: 4,
+                        parking: 1,
+                        hall: 2,
+                        idState: 1,
+                        info: 'Recien hecha',
+                        squareMeters: 350,
+                        price: 350000,
+                        idClient: 5,
+                        autorizationId: 2,
+                        avenue: 'Circunvalación 3',
+                        urbanization: 'Los bucares',
+                        days: 30,
+                        date: new Date(),
+                        images: 'EB-EN5843.jpg'
                     }
                 ]
             });

@@ -12,6 +12,11 @@ export class UsersService {
 
     async getAllUsers(): Promise<DtoUsers[]>{
         const getUsers: Users[] = await this.prismaService.users.findMany({
+            where:{
+                rol: {
+                    in: [1,2]
+                }
+            },
             include: {
                 roles: true
             }
@@ -20,7 +25,7 @@ export class UsersService {
         const usersParse: any[] = getUsers;
 
         usersParse.map(us => {
-            us.rolDes = us.roles.Rol
+            us.rolDes = us.roles.rol
             delete us.roles
         });
 
@@ -30,14 +35,14 @@ export class UsersService {
     async postNewUsers(newUser: DtoNewUser): Promise<DtoBaseResponse>{
         const createUser = await this.prismaService.users.create({
             data: {
-                Name: newUser.name,
-                Lastname: newUser.lastname,
-                Identify: newUser.identify,
-                Email: newUser.email,
-                Phone: newUser.phone,
-                Rol: newUser.rol,
-                Civil: newUser.civil,
-                Password: '12345678'
+                name: newUser.name,
+                lastname: newUser.lastname,
+                identify: newUser.identify,
+                email: newUser.email,
+                phone: newUser.phone,
+                rol: newUser.rol,
+                civil: newUser.civil,
+                password: '12345678'
             }
         });
 
@@ -50,18 +55,39 @@ export class UsersService {
         return baseResponse;
     }
 
-    async putUsers(user: DtoEditUser, idUser: number): Promise<DtoBaseResponse>{
+    async postNewUsersReturn(newUser: DtoNewUser): Promise<DtoEditUser>{
+        const createUser = await this.prismaService.users.create({
+            data: {
+                name: newUser.name,
+                lastname: newUser.lastname,
+                identify: newUser.identify,
+                email: newUser.email,
+                phone: newUser.phone,
+                rol: newUser.rol,
+                civil: newUser.civil,
+                password: '12345678'
+            }
+        });
+
+        if(!createUser){
+            throw new BadRequestException('Error al crear usuario.');
+        }
+
+        return createUser;
+    }
+
+    async putUsers(user: DtoEditUser, idUser: string): Promise<DtoBaseResponse>{
         const findUser = await this.prismaService.users.update({
             data: {
-                Name: user.name,
-                Lastname: user.lastname,
-                Identify: user.identify,
-                Email: user.email,
-                Phone: user.phone,
-                Civil: user.civil,
+                name: user.name,
+                lastname: user.lastname,
+                identify: user.identify,
+                email: user.email,
+                phone: user.phone,
+                civil: user.civil,
             },
             where: {
-                IdUsers: Number(idUser)
+                idUsers: Number(idUser)
             }
         });
 
