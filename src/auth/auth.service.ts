@@ -68,8 +68,6 @@ export class AuthService {
             }
         });
 
-        console.log(updatePasswordUser);
-
         const response = {
             message: `Contraseña actualizada`,
             success: true,

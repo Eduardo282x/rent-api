@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Rent, Sales } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { RentService } from 'src/rent/rent.service';
-import { BodySale } from './sales.dto';
+import { BodySale, DtoDateFilter } from './sales.dto';
 
 @Injectable()
 export class SalesService {
@@ -14,6 +14,31 @@ export class SalesService {
             where: {
                 rent: {
                     idState: 2
+                }
+            },
+            include: {
+                rent: {
+                    include: {
+                        typerent: true,
+                        client: true,
+                        autorization: true,
+                        state: true
+                    }
+                },
+                client: true
+            }
+        });
+    }
+
+    async getSalesFilter(dateFilter: DtoDateFilter): Promise<Sales[]> {
+        return await this.prismaService.sales.findMany({
+            where: {
+                rent: {
+                    idState: 2,
+                },
+                date: {
+                    gte: dateFilter.dateStart,
+                    lte: dateFilter.dateEnd
                 }
             },
             include: {
