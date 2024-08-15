@@ -3,7 +3,7 @@ import { Rent, Type } from '@prisma/client';
 import { DtoBaseResponse } from 'src/dtos/base-response';
 import { baseResponse } from 'src/dtos/baseResponse';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { DtoRents, DtoUpdateRent, DtoUpdateRentData } from './rent.dtos';
+import { DtoRentImage, DtoRents, DtoUpdateRent, DtoUpdateRentData } from './rent.dtos';
 
 const PDFDocument = require('pdfkit')
 
@@ -58,7 +58,7 @@ export class RentService {
                 info: rent.info,
                 price: rent.price,
                 squareMeters: rent.squareMeters,
-                images: rent.images,
+                images: 'Casa2.webp',
                 idClient: rent.idClient,
                 avenue: rent.avenue,
                 urbanization: rent.urbanization,
@@ -76,6 +76,8 @@ export class RentService {
         return this.getPdfDownload(createRent.idRent.toString())
     }
 
+
+
     async putUpdateRent(rent: DtoUpdateRent): Promise<DtoBaseResponse> {
         const createRent = await this.prismaService.rent.update({
             data: {
@@ -83,6 +85,33 @@ export class RentService {
             },
             where: {
                 idRent: rent.idRent
+            }
+        });
+
+        if (!createRent) {
+            throw new BadRequestException(`No se pudo actualizar la propiedad.`);
+        }
+
+        baseResponse.message = 'Propiedad actualizada exitosamente.';
+
+        return baseResponse;
+    }
+
+    async putUpdateRentImage(file: Express.Multer.File, rent: DtoRentImage): Promise<DtoBaseResponse> {
+        const findRent = await this.prismaService.rent.findFirst({
+            where: {
+                idClient: Number(rent.idClient),
+                nameRent: rent.nameRent,
+                autorizationId: Number(rent.idUser)
+            }
+        });
+
+        const createRent = await this.prismaService.rent.update({
+            data: {
+                images: file.filename
+            },
+            where: {
+                idRent: findRent.idRent
             }
         });
 

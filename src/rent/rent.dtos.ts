@@ -1,5 +1,13 @@
 import { IsString, IsNumber, IsBoolean } from "class-validator";
 
+
+export class DtoRentImage {
+    nameRent: string
+    idClient: number;
+    idUser: number;
+}
+
+
 export class DtoRents {
     @IsString()
     nameRent: string

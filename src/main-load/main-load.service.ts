@@ -116,7 +116,7 @@ export class MainLoadService {
                         urbanization: 'La Rotaria',
                         days: 10,
                         date: new Date('2024-04-15'),
-                        images: 'https://casallasduque.com/wp-content/uploads/2022/07/remodelacion-apartamentos-montearrollo-comedor-1024x683.jpg'
+                        images: 'Casa1.webp'
                     },
                     {
                         nameRent: 'Apartamento',
@@ -137,7 +137,7 @@ export class MainLoadService {
                         urbanization: 'Curva de Molina',
                         days: 15,
                         date: new Date('2024-06-08'),
-                        images: 'https://www.shutterstock.com/image-photo/new-modern-apartment-buildings-vancouver-600nw-2326087651.jpg'
+                        images: 'Casa2.webp'
                     },
                     {
                         nameRent: 'Apartamento pequeño',
@@ -158,7 +158,7 @@ export class MainLoadService {
                         urbanization: 'Los olivos',
                         days: 20,
                         date: new Date('2024-02-28'),
-                        images: 'https://cdn.pixabay.com/photo/2013/11/13/21/14/san-francisco-210230_640.jpg'
+                        images: 'san-francisco-210230_640.jpg'
                     },
                     {
                         nameRent: 'Casa lujosa',
@@ -179,7 +179,7 @@ export class MainLoadService {
                         urbanization: 'Los bucares',
                         days: 30,
                         date: new Date(),
-                        images: 'https://assets.easybroker.com/property_images/1445843/21613488/EB-EN5843.jpg?version=1581143120'
+                        images: 'EB-EN5843.jpg'
                     }
                 ]
             });
