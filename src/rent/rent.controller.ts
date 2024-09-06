@@ -60,9 +60,9 @@ export class RentController {
     ) {
 
         // Verifica si el archivo se ha cargado correctamente.
-        if (!file) {
-            throw new BadRequestException('Archivo no encontrado');
-        }
+        // if (!file) {
+        //     throw new BadRequestException('Archivo no encontrado');
+        // }
 
         // Continúa con la lógica de negocio (por ejemplo, guardar en la base de datos).
         return await this.rentService.putUpdateRentImage(file, updateRent);

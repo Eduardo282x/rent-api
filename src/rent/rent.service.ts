@@ -106,6 +106,10 @@ export class RentService {
             }
         });
 
+        if(!file && !findRent){
+            throw new BadRequestException(`No se pudo actualizar la propiedad.`);
+        }
+
         const createRent = await this.prismaService.rent.update({
             data: {
                 images: file.filename
@@ -216,11 +220,11 @@ export class RentService {
                 QUINTA
                     GASTOS: Los gastos notariales, de registro y demás que se originen con la firma y protocolización del presente contrato, serán asumidos en su totalidad por EL COMPRADOR.
 
-                En constancia de lo anterior, se firma el presente contrato en la ciudad de [CIUDAD], a los ${day} días del mes de ${monthNames[month]} de ${year}.
+                En constancia de lo anterior, se firma el presente contrato en la ciudad de Maracaibo, a los ${day} días del mes de ${monthNames[month]} de ${year}.
 
                 EL COMPRADOR                                 EL VENDEDOR
                 ${oneRent.autorization.name} ${oneRent.autorization.lastname}                           ${oneRent.client.name} ${oneRent.client.lastname}
-                C.C. [NÚMERO]                                 C.C. [NÚMERO]
+                C.C.                                             C.C. 
                 `,
                 {
                     align: 'justify',

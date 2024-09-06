@@ -35,11 +35,9 @@ CREATE TABLE `Roles` (
 -- CreateTable
 CREATE TABLE `Sales` (
     `idSales` INTEGER NOT NULL AUTO_INCREMENT,
-    `idUser` INTEGER NOT NULL,
     `idClient` INTEGER NOT NULL,
     `idRent` INTEGER NOT NULL,
     `date` DATETIME(3) NOT NULL,
-    `stateIdState` INTEGER NULL,
 
     PRIMARY KEY (`idSales`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -75,14 +73,6 @@ CREATE TABLE `Users` (
     PRIMARY KEY (`idUsers`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- CreateTable
-CREATE TABLE `Locations` (
-    `IdLocation` INTEGER NOT NULL AUTO_INCREMENT,
-    `location` VARCHAR(191) NOT NULL,
-
-    PRIMARY KEY (`IdLocation`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 -- AddForeignKey
 ALTER TABLE `Rent` ADD CONSTRAINT `Rent_typeRent_fkey` FOREIGN KEY (`typeRent`) REFERENCES `Type`(`idType`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -96,13 +86,10 @@ ALTER TABLE `Rent` ADD CONSTRAINT `Rent_idClient_fkey` FOREIGN KEY (`idClient`) 
 ALTER TABLE `Rent` ADD CONSTRAINT `Rent_autorizationId_fkey` FOREIGN KEY (`autorizationId`) REFERENCES `Users`(`idUsers`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Sales` ADD CONSTRAINT `Sales_idUser_fkey` FOREIGN KEY (`idUser`) REFERENCES `Users`(`idUsers`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Sales` ADD CONSTRAINT `Sales_idClient_fkey` FOREIGN KEY (`idClient`) REFERENCES `Users`(`idUsers`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Sales` ADD CONSTRAINT `Sales_idRent_fkey` FOREIGN KEY (`idRent`) REFERENCES `Rent`(`idRent`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `Sales` ADD CONSTRAINT `Sales_stateIdState_fkey` FOREIGN KEY (`stateIdState`) REFERENCES `State`(`idState`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Users` ADD CONSTRAINT `Users_rol_fkey` FOREIGN KEY (`rol`) REFERENCES `Roles`(`idRol`) ON DELETE RESTRICT ON UPDATE CASCADE;
